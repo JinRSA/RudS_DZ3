@@ -35,8 +35,8 @@ public class Zoo {
         }
 
         System.out.println();
-        Aviary<Carnivorous> animalsCarnivorous = new Aviary<>(AviarySize.MEDIUM);
-        Aviary<Herbivore> animalsHerbivore = new Aviary<>(AviarySize.LARGE);
+        Aviary<Carnivorous> animalsCarnivorous = new Aviary<>(AviarySize.MEDIUM, 1);
+        Aviary<Herbivore> animalsHerbivore = new Aviary<>(AviarySize.LARGE, 2);
 
         System.out.println("\nДобавление животных в вольеры:");
         for (Animal animal : animals) {
@@ -47,15 +47,19 @@ public class Zoo {
                 animalsHerbivore.addAnimal((Herbivore) animal);
             } catch (ClassCastException ignored) {}
         }
+        System.out.println("\tЖивотных в вольере для плотоядных: " + animalsCarnivorous.getAnimalsCount() + ". Всего мест: " + animalsCarnivorous.getCapacity());
+        System.out.println("\tЖивотных в вольере для травоядных: " + animalsHerbivore.getAnimalsCount() + ". Всего мест: " + animalsHerbivore.getCapacity());
 
         System.out.println("\nПолучение ссылок на животных в вольере:");
-        System.out.println(animalsCarnivorous.getAnimal(animals[3].hashCode()));
-        System.out.println(animalsCarnivorous.getAnimal(animals[4].hashCode()));
-        System.out.println(animalsCarnivorous.getAnimal(animals[5].hashCode()));
+        for (int i = 0; i < animals.length; ++i) {
+            System.out.println(animalsCarnivorous.getAnimal(animals[i].hashCode()));
+        }
 
         System.out.println("\nУдаление животных из вольера:");
-        System.out.println(animalsCarnivorous.deleteAnimal(animals[3].hashCode()) ? "Животное " + animals[0].getName() + " удалено." : "Животного " + animals[0].getName() + " нету в вольере для плотоядных.");
-        System.out.println(animalsCarnivorous.deleteAnimal(animals[4].hashCode()) ? "Животное " + animals[1].getName() + " удалено." : "Животного " + animals[0].getName() + " нету в вольере для плотоядных.");
-        System.out.println(animalsCarnivorous.deleteAnimal(animals[5].hashCode()) ? "Животное " + animals[2].getName() + " удалено." : "Животного " + animals[0].getName() + " нету в вольере для плотоядных.");
+        for (int i = 0; i < animals.length; ++i) {
+            System.out.println(animalsCarnivorous.deleteAnimal(animals[i].hashCode()) ? "Животное " + animals[i].getName() + " удалено." : "Животного " + animals[i].getName() + " нету в вольере для плотоядных.");
+        }
+        System.out.println("\tЖивотных в вольере для плотоядных: " + animalsCarnivorous.getAnimalsCount() + ". Всего мест: " + animalsCarnivorous.getCapacity());
+//        System.out.println("\tЖивотных в вольере для травоядных: " + animalsHerbivore.getAnimalsCount() + ". Всего мест: " + animalsHerbivore.getCapacity());
     }
 }
